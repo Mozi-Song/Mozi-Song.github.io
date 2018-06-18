@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="utf-8">
+    <title>Effective Java</title>
+	<link href="styles/styles.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet"> 
+  </head>
+  <body>
+  <!-- 目录 -->
+	<a href="#item1">Item1</a> 考虑静态方法替代构造函数 
+  <!-- 目录完 -->
+	<a name="item1"><h3>Item1: 考虑静态方法替代构造函数</h3></a>
+	<p>静态方法相比较于构造函数的优点：
+		<ol>
+			<li>通过给指定静态方法的名称可更好地指引client使用，如BigInteger.probablePrime()就比new BigInteger()好，后者仅从名称看不出可能返回质数</li>
+			<li>Instance可控，不需每次调用时都创建一个新对象。可做singleton，也可做不可变类，使得用户可以用a == b代替a.equals(b)，提升效率。</li>
+			<li>可以返回return type的任意子类对象。如Collections类，是个interface-based framework（<a href="#item18">Item18</a>），即返回值都是某个interface的子类对象，但这些子类的实现隐藏在Collections中不被用户看到，减少了conceptual weight。<br>
+			至于返回哪个子类的对象，还可以在调用时根据参数决定，如EnumSet.noneOf() (<a href="#item32">Item32</a>)。<br>
+			另外，在写这个静态工厂方法时，还有可能这个子类并未存在——service provider framework。
+			</li>
+			<li>* 作者认为，静态方法支持type inference而构造函数不支持，实际上，在Java1.8中也可写<br>
+			Map&ltString, List&ltString&gt&gt map = new HashMap&lt&gt();
+			</li>
+		</ol>
+	</p>
+	<p>静态工厂方法的缺点：
+		<ol>
+			<li>一个类中若无public或protected构造函数则不能被继承。因为子类所有构造函数中都会隐性调用父类的构造函数。<br>
+			（注：以上情况指的是用户只声明private构造函数，而非不声明任何构造函数的情况，因为那样的话编译器会自动生成默认构造函数）
+			</li>
+			<li>静态工厂方法与其它的静态方法在语言上并没有什么不同。（给用户造成一些迷惑）<br>
+			作者建议：使用common naming conventions:<br>
+			<ul>
+				<li>valueOf --> 返回value与参数“相同”的对象，type-conversion方法</li>
+				<li>of --> 与valueOf相同</li>
+				<li>getInstance</li>
+				<li>newInstance</li>
+				<li>getXXX (XXX指要获得的子类类型)</li>
+				<li>newXXX (如newCachedThreadPool)</li>
+			</ul>
+			</li>
+		</ol>
+	</p>
+	
+  </body>
+</html>
