@@ -11,6 +11,7 @@ function getRandomArbitrary(min, max) {
 }
 
 function clickedP(){
+	window.location.href = "html/portal.html";
 	document.getElementById("demo").innerHTML = flyingRecord;
 }
 
