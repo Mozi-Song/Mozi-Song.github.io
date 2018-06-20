@@ -13,10 +13,21 @@
 	<a name="sorting"><h3><em>The Algorithm Design Manual Chap4.</em> Sorting and Searching</h3></a>
 	<p>最优排序时间：O(nlog(n))。<br>
 	
-	排序的应用：（做算法题时可参考）
+	排序的应用：（做算法题时可参考）<br>
+	An important algorithm design technique is to <b>use sorting as a basic
+	building block</b>, because many other problems become easy once a set of items is
+	sorted.
 		<ol>
-			<li></li>
+			<li><b>查找某数字</b>——将数组排序，此情况下查找可做到O(log(n))。查找是排序最重要的应用。</li>
+			<li><b>Closest pair（差值最小的数对）</b>——将数组排序后遍历即可，只需要linear time。</li>
+			<li><b>元素重复性（是否存在重复元素）</b>——2的特例，排序后进行linear scan，找到差值为0的数对。</li>
+			<li><b>找出元素k重复的次数</b>——将数组排序，找到k-ϵ和k+ϵ的序号并相减（ϵ为任意足够小的数），时间为O(log(n))。</li>
+			<li><b>选择第k大的数</b>——排序后，constant time查找第k个数即可。特殊：第n/2个数是中位数。</li>
+			<li><b>Convex hulls（凸包；凸壳）</b>——没看懂，原书P105</li>
 		</ol>
+		Sorting lies at the heart of many algorithms. Sorting the
+	data is <b>one of the first things any algorithm designer should try</b> in the quest
+	for efficiency.
 	</p>
 	
   </body>
